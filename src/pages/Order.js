@@ -9,7 +9,7 @@ function Order({ list, handleEdit }) {
     const totalSum = list.reduce((accumulator, food) => {
       return accumulator + food.price * food.quantity
     }, 0)
-    setPrice(totalSum)
+    setPrice(totalSum.toFixed(2))
   }, [list])
 
   useEffect(() => {
