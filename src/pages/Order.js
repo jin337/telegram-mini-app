@@ -41,7 +41,7 @@ function Order({ list, handleEdit }) {
         <input
           type='text'
           placeholder='Add comment'
-          className='text-xl w-full my-4 px-4 py-2 focus:border-none'
+          className='text-xl w-full my-4 px-4 py-2 focus-visible:outline-none'
         />
       </div>
       <div className='text-base text-neutral-400 px-4 bg-neutral-200 pb-10'>Any special requests,details,final wishes etc.</div>
