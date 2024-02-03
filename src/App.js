@@ -21,7 +21,8 @@ function App() {
       setCartItems([...cartItems, { ...item, quantity: 1 }])
     }
 
-    tele.MainButton.text = 'view order'
+    tele.MainButton.text = 'VIEW ORDER'
+    tele.MainButton.color	 = '#31b545'
     tele.MainButton.show()
   }
 
