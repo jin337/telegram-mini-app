@@ -30,9 +30,9 @@ function App() {
 
     if (exist?.quantity === 1) {
       setCartItems(cartItems.filter((e) => e.id !== item.id))
+      tele.MainButton.hide()
     } else {
       setCartItems(cartItems.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e)))
-      tele.MainButton.hide()
     }
   }
 
