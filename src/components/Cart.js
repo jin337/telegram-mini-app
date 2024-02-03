@@ -6,9 +6,9 @@ function Cart({ item }) {
       <div className='flex'>
         <div className='text-4xl'>{item.Image}</div>
         <div className='ml-2'>
-          <div className='font-bold text-sm'>
+          <div className='font-bold text-base'>
             {item.title}
-            <span className=' text-amber-500 ml-1'>{item.quantity}x</span>
+            <span className='text-amber-500 ml-1'>{item.quantity}x</span>
           </div>
           <div className='text-sm text-neutral-400'>{item.desc}</div>
         </div>
