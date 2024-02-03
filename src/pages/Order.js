@@ -7,7 +7,7 @@ function Order({ list, handleEdit }) {
 
   useEffect(() => {
     const totalSum = list.reduce((accumulator, food) => {
-      return accumulator + (food.price * food.quantity)
+      return accumulator + food.price * food.quantity
     }, 0)
     setPrice(totalSum)
   }, [list])
@@ -18,13 +18,18 @@ function Order({ list, handleEdit }) {
     tele.MainButton.show()
   }, [price])
 
+  const setEdit = () => {
+    handleEdit()
+    tele.MainButton.hide()
+  }
+
   return (
     <main className='w-screen h-screen bg-neutral-200'>
       <div className='flex justify-between bg-white pt-10 px-4'>
         <div className='text-base font-bold'>YOUR ORDER</div>
         <div
           className='text-sm text-green-500 cursor-pointer'
-          onClick={handleEdit}
+          onClick={setEdit}
         >
           Edit
         </div>

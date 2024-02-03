@@ -52,6 +52,13 @@ function App() {
 
     setFoods(newFood)
     setEdit(false)
+
+    tele.MainButton.text = 'VIEW ORDER'
+    tele.MainButton.color = '#31b545'
+    tele.MainButton.show()
+    tele.MainButton.onClick(() => {
+      setEdit(true)
+    })
   }
 
   return edit ? (
