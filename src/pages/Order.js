@@ -44,7 +44,7 @@ function Order({ list, handleEdit }) {
           className='text-base w-full my-4 px-4 py-2 focus-visible:outline-none'
         />
       </div>
-      <div className='text-sm text-neutral-500 px-4 bg-neutral-200 pb-10'>Any special requests,details,final wishes etc.</div>
+      <div className='text-sm text-neutral-500 px-4 bg-neutral-100 pb-10'>Any special requests,details,final wishes etc.</div>
     </main>
   )
 }
