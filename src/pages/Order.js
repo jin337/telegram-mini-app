@@ -1,20 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cart from '../components/Cart'
 
 const tele = window.Telegram.WebApp
 function Order({ list, handleEdit }) {
+  const [price, setPrice] = useState(0)
+
   useEffect(() => {
-    tele.MainButton.text = 'PAY $123'
+    const totalSum = list.reduce((accumulator, food) => {
+      return accumulator + (food.price * food.quantity)
+    }, 0)
+    setPrice(totalSum)
+  }, [list])
+
+  useEffect(() => {
+    tele.MainButton.text = 'PAY $' + price
     tele.MainButton.color = '#31b545'
     tele.MainButton.show()
-  }, [])
+  }, [price])
 
   return (
     <main className='w-screen h-screen bg-neutral-200'>
       <div className='flex justify-between bg-white pt-10 px-4'>
         <div className='text-base font-bold'>YOUR ORDER</div>
         <div
-          className='text-sm text-green-500'
+          className='text-sm text-green-500 cursor-pointer'
           onClick={handleEdit}
         >
           Edit
