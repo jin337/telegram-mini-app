@@ -8,7 +8,7 @@ function Cart({ item }) {
         <div className='ml-2'>
           <div className='font-bold text-sm'>
             {item.title}
-            <span className=' text-amber-500 ml-1'>{item.quantity}X</span>
+            <span className=' text-amber-500 ml-1'>{item.quantity}x</span>
           </div>
           <div className='text-sm text-neutral-400'>{item.desc}</div>
         </div>
