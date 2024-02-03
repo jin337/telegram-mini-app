@@ -38,7 +38,13 @@ function App() {
 
     if (exist?.quantity === 1) {
       setCartItems(cartItems.filter((e) => e.id !== item.id))
-      tele.MainButton.hide()
+
+      const totalSum = cartItems.reduce((arr, e) => {
+        return arr + e.price * e.quantity
+      }, 0)
+      if (totalSum === 0) {
+        tele.MainButton.hide()
+      }
     } else {
       setCartItems(cartItems.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e)))
     }
