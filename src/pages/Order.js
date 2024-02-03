@@ -20,7 +20,6 @@ function Order({ list, handleEdit }) {
 
   const setEdit = () => {
     handleEdit()
-    tele.MainButton.hide()
   }
 
   return (
