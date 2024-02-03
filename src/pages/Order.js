@@ -18,17 +18,13 @@ function Order({ list, handleEdit }) {
     tele.MainButton.show()
   }, [price])
 
-  const setEdit = () => {
-    handleEdit()
-  }
-
   return (
     <main className='w-screen h-screen bg-neutral-200'>
       <div className='flex justify-between bg-white pt-10 px-4'>
         <div className='text-base font-bold'>YOUR ORDER</div>
         <div
           className='text-sm text-green-500 cursor-pointer'
-          onClick={setEdit}
+          onClick={handleEdit}
         >
           Edit
         </div>
