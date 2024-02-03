@@ -37,7 +37,7 @@ function Order({ list, handleEdit }) {
           />
         ))}
       </div>
-      <div className='bg-neutral-200'>
+      <div className='bg-neutral-100'>
         <input
           type='text'
           placeholder='Add comment'
