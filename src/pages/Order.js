@@ -40,7 +40,7 @@ function Order({ list, handleEdit }) {
       <div className='bg-neutral-100'>
         <input
           type='text'
-          placeholder='Add comment'
+          placeholder='Add comment…'
           className='text-base w-full my-3 px-4 py-2 focus-visible:outline-none'
         />
       </div>
