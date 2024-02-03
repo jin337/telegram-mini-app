@@ -4,7 +4,7 @@ function Cart({ item }) {
   return (
     <div className='px-4 py-2 flex justify-between'>
       <div className='flex'>
-        <div className='text-3xl'>{item.Image}</div>
+        <div className='text-4xl'>{item.Image}</div>
         <div className='ml-3'>
           <div className='font-bold text-base'>
             {item.title}
