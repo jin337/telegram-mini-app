@@ -20,7 +20,7 @@ function Order({ list, handleEdit }) {
 
   return (
     <main className='w-screen h-screen bg-neutral-100'>
-      <div className='flex justify-between bg-white p-4 pb-2'>
+      <div className='flex justify-between bg-white px-4 pt-5 pb-2'>
         <div className='text-base font-bold'>YOUR ORDER</div>
         <div
           className='text-base text-green-500 cursor-pointer'
