@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Card from './components/Card'
+import Card from '../components/Card'
+import Order from './Order'
 
-const { getData } = require('./db/index')
-const foods = getData()
+const { getData } = require('../db/index')
+const data = getData()
 const tele = window.Telegram.WebApp
 
 function App() {
+  const [foods, setFoods] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [edit, setEdit] = useState(false)
 
   useEffect(() => {
+    setFoods(data)
     tele.ready()
   }, [])
 
@@ -22,8 +26,11 @@ function App() {
     }
 
     tele.MainButton.text = 'VIEW ORDER'
-    tele.MainButton.color	 = '#31b545'
+    tele.MainButton.color = '#31b545'
     tele.MainButton.show()
+    tele.MainButton.onClick(() => {
+      setEdit(true)
+    })
   }
 
   const onRemove = (item) => {
@@ -37,7 +44,22 @@ function App() {
     }
   }
 
-  return (
+  const handleEdit = () => {
+    let newFood = foods.map((element) => {
+      const cartItem = cartItems.find((item) => item.id === element.id)
+      return cartItem ? cartItem : element
+    })
+
+    setFoods(newFood)
+    setEdit(false)
+  }
+
+  return edit ? (
+    <Order
+      list={cartItems}
+      handleEdit={handleEdit}
+    />
+  ) : (
     <main className='flex flex-wrap justify-evenly select-none'>
       {foods.map((item) => (
         <Card
