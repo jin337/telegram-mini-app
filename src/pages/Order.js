@@ -21,9 +21,9 @@ function Order({ list, handleEdit }) {
   return (
     <main className='w-screen h-screen bg-neutral-100'>
       <div className='flex justify-between bg-white p-4'>
-        <div className='text-base font-bold'>YOUR ORDER</div>
+        <div className='text-xl font-bold'>YOUR ORDER</div>
         <div
-          className='text-sm text-green-500 cursor-pointer'
+          className='text-base text-green-500 cursor-pointer'
           onClick={handleEdit}
         >
           Edit
@@ -41,7 +41,7 @@ function Order({ list, handleEdit }) {
         <input
           type='text'
           placeholder='Add comment…'
-          className='text-base w-full my-3 px-4 py-2 focus-visible:outline-none'
+          className='text-base w-full my-3 px-4 py-3 focus-visible:outline-none'
         />
       </div>
       <div className='text-sm text-neutral-500 px-4 bg-neutral-100 pb-10'>Any special requests,details,final wishes etc.</div>
