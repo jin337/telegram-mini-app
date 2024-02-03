@@ -37,11 +37,13 @@ function App() {
     const exist = cartItems.find((e) => e.id === item.id)
 
     if (exist?.quantity === 1) {
-      setCartItems(cartItems.filter((e) => e.id !== item.id))
+      let arr = cartItems.filter((e) => e.id !== item.id)
+      setCartItems(arr)
 
-      const totalSum = cartItems.reduce((arr, e) => {
+      const totalSum = arr.reduce((arr, e) => {
         return arr + e.price * e.quantity
       }, 0)
+
       if (totalSum === 0) {
         tele.MainButton.hide()
       }
