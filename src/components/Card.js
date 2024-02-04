@@ -27,13 +27,13 @@ function Card({ item, onAdd, onRemove }) {
   return (
     <div className='relative w-28 text-center my-3 z-0'>
       <div
-        className={`text-xs leading-none font-bold text-white bg-amber-500  py-1 px-2 rounded-full absolute right-3 ${
-          count !== 0 ? 'visible' : 'hidden'
-        } ${isCountChanged ? 'animate-scale' : ''}`}
+        className={`text-xs leading-none font-bold text-white bg-amber-500  py-1 px-2 rounded-full absolute right-3
+          ${count !== 0 ? 'visible' : 'hidden'}
+          ${isCountChanged ? 'animate-scale' : ''}`}
       >
         {count}
       </div>
-      <div className='text-6xl my-2'>{item.Image}</div>
+      <div className={`text-6xl my-2 ${count !== 0 ? 'animate-rotate' : ''}`}>{item.Image}</div>
       <div className='text-sm mb-2 text-nowrap'>
         {item.title} · <span className='font-bold'>$ {item.price}</span>
       </div>
