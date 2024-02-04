@@ -17,15 +17,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    let arr = foods.map((element) => {
-      const cartItem = cartItems.find((item) => item.id === element.id)
-      return cartItem ? cartItem : element
-    })
-    dispatch(setFoods(arr))
-
-    tele.MainButton.text = 'VIEW ORDER'
-    tele.MainButton.color = '#31b545'
-    tele.MainButton.show()
+    if (cartItems.length > 0) {
+      let arr = foods.map((element) => {
+        const cartItem = cartItems.find((item) => item.id === element.id)
+        return cartItem ? cartItem : element
+      })
+      dispatch(setFoods(arr))
+      tele.MainButton.text = 'VIEW ORDER'
+      tele.MainButton.color = '#31b545'
+      tele.MainButton.show()
+    }
   }, [cartItems])
 
   const onAdd = (item) => {
