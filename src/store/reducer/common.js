@@ -1,5 +1,7 @@
-export const getData = () => {
-  return [
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+  foods: [
     {
       id: 1,
       title: 'Burger',
@@ -96,5 +98,23 @@ export const getData = () => {
       quantity: 0,
       desc: 'this is flan',
     },
-  ]
+  ],
+  cartItems: [],
 }
+
+export const common = createSlice({
+  name: 'common',
+  initialState,
+  reducers: {
+    setCartItems: (state, action) => {
+      state.cartItems = action.payload
+    },
+    setFoods: (state, action) => {
+      state.foods = action.payload
+    },
+  },
+})
+
+export const { setCartItems, setFoods } = common.actions
+
+export default common.reducer

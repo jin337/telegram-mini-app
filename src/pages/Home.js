@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCartItems, setFoods } from '../store/reducer/common'
+
 import Card from '../components/Card'
-import Order from './Order'
 
-const { getData } = require('../db/index')
-const data = getData()
 const tele = window.Telegram.WebApp
-
 function App() {
-  const [foods, setFoods] = useState([])
-  const [cartItems, setCartItems] = useState([])
-  const [edit, setEdit] = useState(false)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const cartItems = useSelector((state) => state.common.cartItems)
+  const foods = useSelector((state) => state.common.foods)
 
   useEffect(() => {
-    setFoods(data)
     tele.ready()
   }, [])
+
+  useEffect(() => {
+    let arr = foods.map((element) => {
+      const cartItem = cartItems.find((item) => item.id === element.id)
+      return cartItem ? cartItem : element
+    })
+    dispatch(setFoods(arr))
+
+    tele.MainButton.text = 'VIEW ORDER'
+    tele.MainButton.color = '#31b545'
+    tele.MainButton.show()
+  }, [cartItems])
 
   const onAdd = (item) => {
     const exist = cartItems.find((e) => e.id === item.id)
 
     if (exist) {
-      setCartItems(cartItems.map((e) => (e.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : e)))
+      let arr = cartItems.map((e) => (e.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : e))
+      dispatch(setCartItems(arr))
     } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }])
+      let arr = [...cartItems, { ...item, quantity: 1 }]
+      dispatch(setCartItems(arr))
     }
 
     tele.MainButton.text = 'VIEW ORDER'
     tele.MainButton.color = '#31b545'
     tele.MainButton.show()
     tele.MainButton.onClick(() => {
-      setEdit(true)
+      navigate('/order')
     })
   }
 
@@ -38,7 +52,7 @@ function App() {
 
     if (exist?.quantity === 1) {
       let arr = cartItems.filter((e) => e.id !== item.id)
-      setCartItems(arr)
+      dispatch(setCartItems(arr))
 
       const totalSum = arr.reduce((arr, e) => {
         return arr + e.price * e.quantity
@@ -48,33 +62,12 @@ function App() {
         tele.MainButton.hide()
       }
     } else {
-      setCartItems(cartItems.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e)))
+      let arr = cartItems.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e))
+      dispatch(setCartItems(arr))
     }
   }
 
-  const handleEdit = () => {
-    let newFood = foods.map((element) => {
-      const cartItem = cartItems.find((item) => item.id === element.id)
-      return cartItem ? cartItem : element
-    })
-
-    setFoods(newFood)
-    setEdit(false)
-
-    tele.MainButton.text = 'VIEW ORDER'
-    tele.MainButton.color = '#31b545'
-    tele.MainButton.show()
-    tele.MainButton.onClick(() => {
-      setEdit(true)
-    })
-  }
-
-  return edit ? (
-    <Order
-      list={cartItems}
-      handleEdit={handleEdit}
-    />
-  ) : (
+  return (
     <main className='flex flex-wrap justify-evenly select-none mb-4'>
       {foods.map((item) => (
         <Card
@@ -86,9 +79,9 @@ function App() {
       ))}
       {/* <button
         className='text-base'
-        onClick={() => setEdit(true)}
+        onClick={() => navigate('/order')}
       >
-        111
+        页面跳转
       </button> */}
     </main>
   )

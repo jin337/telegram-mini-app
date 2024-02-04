@@ -36,7 +36,7 @@ function Card({ item, onAdd, onRemove }) {
       <div className={`text-6xl my-2 ${count !== 0 ? 'animate-rotate' : ''}`}>{item.Image}</div>
       <div className='text-sm mb-2 text-nowrap'>
         {item.title}
-        <span className='px-1'>·</span>
+        <span className='px-0.5'>·</span>
         <span className='font-bold'>${item.price}</span>
       </div>
       <div className='flex gap-1.5 px-4'>

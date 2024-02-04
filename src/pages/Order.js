@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Cart from '../components/Cart'
 
 const tele = window.Telegram.WebApp
-function Order({ list, handleEdit }) {
+function Order() {
+  const navigate = useNavigate()
+  const cartItems = useSelector((state) => state.common.cartItems)
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
-    const totalSum = list.reduce((accumulator, food) => {
+    const totalSum = cartItems.reduce((accumulator, food) => {
       return accumulator + food.price * food.quantity
     }, 0)
     setPrice(totalSum.toFixed(2))
-  }, [list])
+  }, [cartItems])
 
   useEffect(() => {
     tele.MainButton.text = 'PAY $' + price
@@ -24,13 +28,13 @@ function Order({ list, handleEdit }) {
         <div className='text-xl font-bold'>YOUR ORDER</div>
         <div
           className='text-base text-green-500 cursor-pointer'
-          onClick={handleEdit}
+          onClick={() => navigate('/')}
         >
           Edit
         </div>
       </div>
       <div className='bg-white'>
-        {list.map((item) => (
+        {cartItems.map((item) => (
           <Cart
             item={item}
             key={item.id}
