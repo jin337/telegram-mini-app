@@ -25,6 +25,9 @@ function Order() {
     tele.MainButton.text = 'PAY $' + price
     tele.MainButton.color = '#31b545'
     tele.MainButton.show()
+    tele.MainButton.onClick(() => {
+      tele.WebApp.openPaymentForm()
+    })
   }, [price])
 
   return (
