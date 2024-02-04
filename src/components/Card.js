@@ -25,9 +25,9 @@ function Card({ item, onAdd, onRemove }) {
   }
 
   return (
-    <div className='relative w-28 text-center my-3 z-0'>
+    <div className='relative w-28 text-center mt-1 mb-5 z-0 select-none'>
       <div
-        className={`text-xs leading-none font-bold text-white bg-amber-500  py-1 px-2 rounded-full absolute right-3
+        className={`text-xs leading-none font-bold text-white bg-amber-500 py-1.5 p-2 rounded-full absolute right-3
           ${count !== 0 ? 'visible' : 'hidden'}
           ${isCountChanged ? 'animate-scale' : ''}`}
       >

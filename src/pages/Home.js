@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <main className='flex flex-wrap justify-evenly select-none mb-4'>
+    <main className='flex flex-wrap justify-evenly'>
       {foods.map((item) => (
         <Card
           key={item.id}
