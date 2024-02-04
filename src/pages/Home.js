@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { setCartItems, setFoods } from '../store/reducer/common'
+import { setFoods } from '../store/reducer/common'
 
 import Card from '../components/Card'
 
@@ -9,7 +9,6 @@ const tele = window.Telegram.WebApp
 function App() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const cartItems = useSelector((state) => state.common.cartItems)
   const foods = useSelector((state) => state.common.foods)
 
   useEffect(() => {
@@ -17,55 +16,39 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (cartItems.length > 0) {
-      let arr = foods.map((element) => {
-        const cartItem = cartItems.find((item) => item.id === element.id)
-        return cartItem ? cartItem : element
-      })
-      dispatch(setFoods(arr))
+    const totalSum = foods.reduce((accumulator, food) => {
+      return accumulator + food.price * food.quantity
+    }, 0)
+
+    if (totalSum) {
       tele.MainButton.text = 'VIEW ORDER'
       tele.MainButton.color = '#31b545'
       tele.MainButton.show()
+      tele.MainButton.onClick(() => {
+        navigate('/order')
+      })
+    } else {
+      tele.MainButton.hide()
     }
-  }, [cartItems])
+  }, [foods])
 
   const onAdd = (item) => {
-    const exist = cartItems.find((e) => e.id === item.id)
-
+    const exist = foods.find((e) => e.id === item.id)
     if (exist) {
-      let arr = cartItems.map((e) => (e.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : e))
-      dispatch(setCartItems(arr))
-    } else {
-      let arr = [...cartItems, { ...item, quantity: 1 }]
-      dispatch(setCartItems(arr))
+      let arr = foods.map((e) => (e.id === item.id ? { ...exist, quantity: exist.quantity + 1 } : e))
+      dispatch(setFoods(arr))
     }
-
-    tele.MainButton.text = 'VIEW ORDER'
-    tele.MainButton.color = '#31b545'
-    tele.MainButton.show()
-    tele.MainButton.onClick(() => {
-      navigate('/order')
-    })
   }
 
   const onRemove = (item) => {
-    const exist = cartItems.find((e) => e.id === item.id)
-
+    const exist = foods.find((e) => e.id === item.id)
+    let arr = null
     if (exist?.quantity === 1) {
-      let arr = cartItems.filter((e) => e.id !== item.id)
-      dispatch(setCartItems(arr))
-
-      const totalSum = arr.reduce((arr, e) => {
-        return arr + e.price * e.quantity
-      }, 0)
-
-      if (totalSum === 0) {
-        tele.MainButton.hide()
-      }
+      arr = foods.map((e) => (e.id === item.id ? { ...e, quantity: 0 } : e))
     } else {
-      let arr = cartItems.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e))
-      dispatch(setCartItems(arr))
+      arr = foods.map((e) => (e.id === item.id ? { ...e, quantity: e.quantity - 1 } : e))
     }
+    dispatch(setFoods(arr))
   }
 
   return (
@@ -78,12 +61,12 @@ function App() {
           onRemove={onRemove}
         />
       ))}
-      {/* <button
+      <button
         className='text-base'
         onClick={() => navigate('/order')}
       >
         页面跳转
-      </button> */}
+      </button>
     </main>
   )
 }

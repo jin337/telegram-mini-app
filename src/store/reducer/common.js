@@ -99,22 +99,18 @@ const initialState = {
       desc: 'this is flan',
     },
   ],
-  cartItems: [],
 }
 
 export const common = createSlice({
   name: 'common',
   initialState,
   reducers: {
-    setCartItems: (state, action) => {
-      state.cartItems = action.payload
-    },
     setFoods: (state, action) => {
       state.foods = action.payload
     },
   },
 })
 
-export const { setCartItems, setFoods } = common.actions
+export const { setFoods } = common.actions
 
 export default common.reducer

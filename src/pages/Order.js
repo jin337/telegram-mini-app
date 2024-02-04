@@ -6,15 +6,20 @@ import Cart from '../components/Cart'
 const tele = window.Telegram.WebApp
 function Order() {
   const navigate = useNavigate()
-  const cartItems = useSelector((state) => state.common.cartItems)
+  const foods = useSelector((state) => state.common.foods)
+  const [cartItems, setCartItems] = useState([])
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
-    const totalSum = cartItems.reduce((accumulator, food) => {
-      return accumulator + food.price * food.quantity
-    }, 0)
-    setPrice(totalSum.toFixed(2))
-  }, [cartItems])
+    const arr = foods.filter((e) => e.quantity !== 0)
+    setCartItems(arr)
+    if (arr.length) {
+      const totalSum = arr.reduce((accumulator, food) => {
+        return accumulator + food.price * food.quantity
+      }, 0)
+      setPrice(totalSum.toFixed(2))
+    }
+  }, [foods])
 
   useEffect(() => {
     tele.MainButton.text = 'PAY $' + price
