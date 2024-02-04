@@ -75,7 +75,7 @@ function App() {
       handleEdit={handleEdit}
     />
   ) : (
-    <main className='flex flex-wrap justify-evenly select-none'>
+    <main className='flex flex-wrap justify-evenly select-none mb-4'>
       {foods.map((item) => (
         <Card
           key={item.id}
