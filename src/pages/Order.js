@@ -40,7 +40,7 @@ function Order() {
   }
 
   return (
-    <main className='w-screen h-screen bg-neutral-100'>
+    <main className='w-screen h-screen bg-neutral-100 overflow-x-hidden'>
       <div className='flex justify-between bg-white px-4 pt-5 pb-2'>
         <div className='text-xl font-bold'>YOUR ORDER</div>
         <div
