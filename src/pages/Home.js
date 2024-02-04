@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     tele.ready()
-    tele.platform = 'Test App'
   }, [])
 
   useEffect(() => {
