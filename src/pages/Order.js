@@ -11,6 +11,10 @@ function Order() {
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
+    tele.BackButton.show()
+  }, [])
+
+  useEffect(() => {
     const arr = foods.filter((e) => e.quantity !== 0)
     setCartItems(arr)
     if (arr.length) {
