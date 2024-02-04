@@ -17,7 +17,10 @@
   "eslintConfig": {
     "extends": [
       "react-app"
-    ]
+    ],
+    "rulers": {
+      "react-hooks/exhaustive-deps": "off"
+    }
   },
   "browserslist": {
     "production": [
