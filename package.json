@@ -18,7 +18,7 @@
     "extends": [
       "react-app"
     ],
-    "rulers": {
+    "rules": {
       "react-hooks/exhaustive-deps": "off"
     }
   },
