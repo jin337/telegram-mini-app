@@ -61,12 +61,6 @@ function App() {
           onRemove={onRemove}
         />
       ))}
-      <button
-        className='text-base'
-        onClick={() => navigate('/order')}
-      >
-        页面跳转
-      </button>
     </main>
   )
 }
