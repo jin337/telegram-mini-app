@@ -6,6 +6,7 @@ import { setFoods } from '../store/reducer/common'
 import Card from '../components/Card'
 
 const tele = window.Telegram.WebApp
+tele.platform = 'Test App'
 function App() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
